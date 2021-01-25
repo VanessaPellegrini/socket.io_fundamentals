@@ -15,22 +15,8 @@ app.use(express.static(publicPath));
 
 //inicializar socket IO
 
-let io = socketIO(server);
-
-io.on('connection', (client) => {
-    //cuando un usuario se conecta a la app manda la notificacion
-    console.log('usuario conectado');
-
-    //escucha
-    client.on('disconnect', () =>{
-        console.log('usuario desconectado');
-    })
-
-    client.on('enviarMensaje', (message) => {
-        console.log(message);
-    })
-})
-
+module.exports.io = socketIO(server);
+require('./sockets/sockets')
 
 server.listen(port, (err) => {
 
