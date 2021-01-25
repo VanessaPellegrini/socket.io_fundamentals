@@ -18,7 +18,17 @@ app.use(express.static(publicPath));
 let io = socketIO(server);
 
 io.on('connection', (client) => {
+    //cuando un usuario se conecta a la app manda la notificacion
     console.log('usuario conectado');
+
+    //escucha
+    client.on('disconnect', () =>{
+        console.log('usuario desconectado');
+    })
+
+    client.on('enviarMensaje', (message) => {
+        console.log(message);
+    })
 })
 
 
